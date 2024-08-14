@@ -1,0 +1,83 @@
+<!-- Botón para cambiar entre temas -->
+<button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+
+<!-- Barra de búsqueda -->
+<input type="text" id="searchInput" placeholder="Search by name" onkeyup="searchPlayers()">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Stats</title>
+    <!-- Cargar el archivo CSS desde la carpeta static -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Football Player Statistics</h1>
+
+    <!-- Tabla para mostrar jugadores -->
+    <table id="playersTable" border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Team</th>
+                <th>Position</th>
+                <th>Games Played</th>
+                <th>Goals</th>
+                <th>Assists</th>
+                <th>Yellow Cards</th>
+                <th>Red Cards</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Los datos se llenarán dinámicamente -->
+        </tbody>
+    </table>
+
+    <!-- Filtro por posición -->
+<select id="positionFilter" onchange="filterPlayers()">
+    <option value="">All Positions</option>
+    <option value="Forward">Forward</option>
+    <option value="Midfielder">Midfielder</option>
+    <option value="Defender">Defender</option>
+    <option value="Goalkeeper">Goalkeeper</option>
+</select>
+
+<!-- Botones para ordenar -->
+<button onclick="sortPlayers('goals')">Sort by Goals</button>
+<button onclick="sortPlayers('assists')">Sort by Assists</button>
+
+    <!-- Gráfico de Barras de Goles -->
+<h2>Comparación de Goles por Jugador</h2>
+<canvas id="goalsBarChart" width="400" height="200"></canvas>
+
+<!-- Gráfico de Barras de Asistencias -->
+<h2>Comparación de Asistencias por Jugador</h2>
+<canvas id="assistsBarChart" width="400" height="200"></canvas>
+
+
+    <!-- Botones para obtener estadísticas -->
+    <div>
+        <input type="number" id="playerId" placeholder="Enter Player ID" min="1">
+        <button onclick="getAverageGoals()">Get Average Goals</button>
+        <button onclick="getAverageAssists()">Get Average Assists</button>
+        <button onclick="getGoalPercentage()">Get Goal Percentage</button>
+        <button onclick="getCardRatio()">Get Card Ratio</button>
+    </div>
+
+    <!-- Área para mostrar los resultados de las estadísticas -->
+    <div id="results"></div>
+
+    <!-- Canvas para gráficos -->
+    <canvas id="goalsChart" width="400" height="200"></canvas>
+    <canvas id="assistsChart" width="400" height="200"></canvas>
+
+    <!-- Cargar Chart.js desde un CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Cargar el archivo JS desde la carpeta static -->
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
+
